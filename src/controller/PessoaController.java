@@ -10,6 +10,10 @@ public class PessoaController {
     static Scanner leitura = new Scanner(System.in);
     List<Pessoa> listaDePessoas = new ArrayList<>();
 
+    public void setListaDePessoas(List<Pessoa> listaDePessoas) {
+        this.listaDePessoas = listaDePessoas;
+    }
+
     public void exibeMenu(){
         System.out.println("Vamos adicionar algumas pessoas a nossa lista: ");
         populaLista();
@@ -51,10 +55,12 @@ public class PessoaController {
 
         }while (continuar);
 
-        verificaLista();
+        verificaListaFeminina();
+        verificaListaMasculina();
     }
 
-    private void verificaLista(){
+
+    public List<Pessoa> verificaListaFeminina(){
         List<Pessoa> listaFeminina = listaDePessoas.stream()
                 .filter(p -> p.getSexo().equalsIgnoreCase("F"))
                 .toList();
@@ -62,11 +68,18 @@ public class PessoaController {
         System.out.println("Lista feminina: ");
         listaFeminina.forEach(System.out::println);
 
+        return listaFeminina;
+    }
+
+    private List<Pessoa> verificaListaMasculina(){
         List<Pessoa> listaMasculina = listaDePessoas.stream()
                 .filter(p -> p.getSexo().equalsIgnoreCase("M"))
                 .toList();
 
         System.out.println("Lista masculina: ");
         listaMasculina.forEach(System.out::println);
+
+        return listaMasculina;
     }
+
 }
